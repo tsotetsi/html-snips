@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React Count Down</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      const deadLine = new Date((new Date).getTime() + (10 * 86400000)).getTime();
+
+      class ReactCountDownTimer extends React.Component {
+        constructor(props) {
+          super(props)
+          this.state = {
+            days: '',
+            hours: '',
+            minutes: '',
+            seconds: ''
+          };
+        }
+
+        tick() {
+
+          var now = new Date().getTime();
+          var t = deadLine - now;
+
+          var days = Math.floor(t / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((t % (1000 * 60 * 60 * 24))/(1000 * 60 * 60));
+          var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((t % (1000 * 60)) / 1000);
+
+          this.setState(state => ({
+            days: days,
+            hours: hours,
+            minutes: minutes,
+            seconds: seconds
+          }));
+        }
+
+        componentDidMount() {
+          this.interval = setInterval(() => this.tick(), 1000);
+        }
+
+        componentWillUnmount() {
+          clearInterval(this.interval);
+        }
+
+        render() {
+          return React.createElement(
+            'div',
+             null,
+             'Countdown: ',
+             this.state.days + 'd ' + this.state.hours + 'h ' + this.state.minutes + 'm ' + this.state.seconds + 's'
+          );
+        }
+      }
+
+      ReactDOM.render(
+        React.createElement(ReactCountDownTimer, null),
+        document.getElementById('root')
+      );
+
+    </script>
+  </body>
+</html>
