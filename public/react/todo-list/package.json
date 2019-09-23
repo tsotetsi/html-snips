@@ -1,0 +1,19 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "React todo list",
+  "main": "todolist.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "ReactJS",
+    "JavaScript",
+    "Jest",
+    "TDD",
+    "Integration-Testing",
+    "Unit-Testing"
+  ],
+  "author": "Thapelo Tsotetsi",
+  "license": "ISC"
+}
